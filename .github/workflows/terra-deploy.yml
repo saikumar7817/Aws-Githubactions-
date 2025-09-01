@@ -28,14 +28,14 @@ jobs:
       run: terraform init
       working-directory: ./ec2-s3-access
     
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: ./ec2-s3-access
-
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: ./ec2-s3-access
-      
-    # - name: Terraform destroy
-    #   run: terraform destroy
+    # - name: Terraform Plan
+    #   run: terraform plan
     #   working-directory: ./ec2-s3-access
+
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
+    #   working-directory: ./ec2-s3-access
+      
+    - name: Terraform destroy
+      run: terraform destroy
+      working-directory: ./ec2-s3-access
