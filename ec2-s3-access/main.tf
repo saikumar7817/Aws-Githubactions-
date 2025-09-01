@@ -69,5 +69,5 @@ resource "aws_instance" "chatbot_ec2" {
   }
 
   # Add key_name if you want SSH access
-  key_name = "terraform-kp"
+  key_name = "dockerec2keypair"
 }
