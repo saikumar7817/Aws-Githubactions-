@@ -1,9 +1,7 @@
 name: Deploy EC2 with IAM Role
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 permissions:
   id-token: write
