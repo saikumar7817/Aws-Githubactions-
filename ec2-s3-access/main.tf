@@ -2,7 +2,14 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-
+terraform {
+  backend "s3" {
+    bucket         = "terraform-state-sai-skreddy-20250806"
+    key            = "ec2-s3-access/terraform.tfstate"
+    region         = "ap-south-1"
+    dynamodb_table = "terraform-locks"
+  }
+}
 
 # IAM Role for EC2
 resource "aws_iam_role" "ec2_role" {
