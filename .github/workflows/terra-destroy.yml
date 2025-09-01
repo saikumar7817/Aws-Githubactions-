@@ -38,7 +38,7 @@ jobs:
       working-directory: ./ec2-s3-access
 
     - name: Upload Terraform State File
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: terraform-state
         path: ./ec2-s3-access/terraform.tfstate
