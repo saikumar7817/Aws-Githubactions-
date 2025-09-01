@@ -26,14 +26,18 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
 
-    - name: Terraform Init
-      run: terraform init
+    - name: Terraform destroy
+      run: terraform destroy
       working-directory: ./ec2-s3-access
 
-    - name: Terraform Plan
-      run: terraform plan
-      working-directory: ./ec2-s3-access
+    # - name: Terraform Init
+    #   run: terraform init
+    #   working-directory: ./ec2-s3-access
 
-    - name: Terraform Apply
-      run: terraform apply -auto-approve
-      working-directory: ./ec2-s3-access
+    # - name: Terraform Plan
+    #   run: terraform plan
+    #   working-directory: ./ec2-s3-access
+
+    # - name: Terraform Apply
+    #   run: terraform apply -auto-approve
+    #   working-directory: ./ec2-s3-access
