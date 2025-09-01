@@ -60,5 +60,5 @@ resource "aws_instance" "chatbot_ec2" {
   }
 
   # Add key_name if you want SSH access
-  # key_name = "your-key-pair-name"
+  key_name = "terrform-kp"
 }
