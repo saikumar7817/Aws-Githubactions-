@@ -1,0 +1,27 @@
+name: AWS OIDC Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::440436437688:role/AWS+Github
+          aws-region: ap-south-1
+
+      - name: List S3 buckets
+        run: aws s3 ls
