@@ -2,6 +2,8 @@ provider "aws" {
   region = "ap-south-1"
 }
 
+
+
 # IAM Role for EC2
 resource "aws_iam_role" "ec2_role" {
   name = "ec2_s3_access_role"

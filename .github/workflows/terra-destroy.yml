@@ -1,0 +1,44 @@
+name: Import AWS Resources to Terraform State
+
+on:
+  workflow_dispatch:  # Allows manual trigger from GitHub UI
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials using OIDC
+      uses: aws-actions/configure-aws-credentials@v2
+      with:
+        role-to-assume: arn:aws:iam::440436437688:role/AWS+Github
+        aws-region: ap-south-1
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+
+    - name: Terraform Init
+      run: terraform init
+      working-directory: ./ec2-s3-access
+
+    - name: Terraform Import Resources
+      run: |
+        terraform import aws_instance.chatbot_ec2 i-05cc46ff0604148be
+        terraform import aws_iam_role.ec2_role ec2_s3_access_role
+        terraform import aws_iam_policy.s3_access_policy arn:aws:iam::440436437688:policy/s3_read_only
+        terraform import aws_iam_role_policy_attachment.attach_policy ec2_s3_access_role/s3_read_only
+        terraform import aws_iam_instance_profile.ec2_profile ec2_instance_profile
+      working-directory: ./ec2-s3-access
+
+    - name: Upload Terraform State File
+      uses: actions/upload-artifact@v3
+      with:
+        name: terraform-state
+        path: ./ec2-s3-access/terraform.tfstate
